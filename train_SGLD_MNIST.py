@@ -97,7 +97,7 @@ cprint('c', '\nTrain:')
 
 ## weight saving parameters #######
 start_save = 15
-save_every = 2  # we can save every 40 as
+save_every = 2  # We sample every 2 epochs as I have found samples to be correlated after only 1
 N_saves = 100  # Max number of saves
 ###################################
 
@@ -163,6 +163,9 @@ for i in range(epoch, nb_epochs):
 toc0 = time.time()
 runtime_per_it = (toc0 - tic0) / float(nb_epochs)
 cprint('r', '   average time: %f seconds\n' % runtime_per_it)
+
+# Save weight samples from the posterior
+save_object(net.weight_set_samples, models_dir+'/state_dicts.pkl')
 
 ## ---------------------------------------------------------------------------------------------------------------------
 # results

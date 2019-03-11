@@ -6,7 +6,15 @@ import torch.utils.data as data
 import numpy as np
 import os
 import sys
+import cPickle as pickle
 
+def lead_object(filename):
+    with open(filename, 'rb') as input:
+        return pickle.load(input)
+
+def save_object(obj, filename):
+    with open(filename, 'wb') as output:  # Overwrites any existing file.
+        pickle.dump(obj, output, pickle.HIGHEST_PROTOCOL)
 
 def mkdir(paths):
     if not isinstance(paths, (list, tuple)):
