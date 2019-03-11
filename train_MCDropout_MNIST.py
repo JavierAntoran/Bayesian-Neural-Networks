@@ -18,7 +18,7 @@ parser.add_argument('--epochs', type=int, nargs='?', action='store', default=60,
                     help='How many epochs to train. Default: 60.')
 parser.add_argument('--lr', type=float, nargs='?', action='store', default=1e-3,
                     help='learning rate. Default: 1e-3.')
-parser.add_argument('--models_dir', type=str, nargs='?', action='store', default='MCdrop_model',
+parser.add_argument('--models_dir', type=str, nargs='?', action='store', default='MCdrop_models',
                     help='Where to save learnt weights and train vectors. Default: \'MCdrop_models\'.')
 parser.add_argument('--results_dir', type=str, nargs='?', action='store', default='MCdrop_results',
                     help='Where to save learnt training plots. Default: \'MCdrop_results\'.')

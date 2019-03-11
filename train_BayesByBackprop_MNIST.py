@@ -5,7 +5,6 @@ from torchvision import transforms, datasets
 import argparse
 import matplotlib
 from src.Bayes_By_Backprop.model import *
-from src.Bayes_By_Backprop_Local_Reparametrization.model import *
 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -23,7 +22,7 @@ parser.add_argument('--lr', type=float, nargs='?', action='store', default=1e-3,
                     help='learning rate. Default: 1e-3.')
 parser.add_argument('--n_samples', type=float, nargs='?', action='store', default=3,
                     help='How many MC samples to take when approximating the ELBO. Default: 3.')
-parser.add_argument('--models_dir', type=str, nargs='?', action='store', default='BBP_model',
+parser.add_argument('--models_dir', type=str, nargs='?', action='store', default='BBP_models',
                     help='Where to save learnt weights and train vectors. Default: \'BBP_models\'.')
 parser.add_argument('--results_dir', type=str, nargs='?', action='store', default='BBP_results',
                     help='Where to save learnt training plots. Default: \'BBP_results\'.')

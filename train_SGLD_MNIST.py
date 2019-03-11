@@ -19,7 +19,7 @@ parser.add_argument('--epochs', type=int, nargs='?', action='store', default=200
                     help='How many epochs to train. Default: 200.')
 parser.add_argument('--lr', type=float, nargs='?', action='store', default=1e-3,
                     help='learning rate. I recommend 1e-3 if preconditioning, else 1e-4. Default: 1e-3.')
-parser.add_argument('--models_dir', type=str, nargs='?', action='store', default='SGLD_model',
+parser.add_argument('--models_dir', type=str, nargs='?', action='store', default='SGLD_models',
                     help='Where to save learnt weights and train vectors. Default: \'SGLD_models\'.')
 parser.add_argument('--results_dir', type=str, nargs='?', action='store', default='SGLD_results',
                     help='Where to save learnt training plots. Default: \'SGLD_results\'.')
