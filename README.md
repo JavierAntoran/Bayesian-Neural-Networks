@@ -20,17 +20,17 @@ Pytorch implementations for the following approximate inference methods:
 
 Train a model on MNIST:
 ```bash
-python train_BayesByBackprop.py --model [MODEL] --prior_sig [PRIOR_SIG] --epochs [EPOCHS] --lr [LR] --n_samples [N_SAMPLES] --models_dir [MODELS_DIR] --results_dir [RESULTS_DIR]
+python train_BayesByBackprop_MNIST.py [--model [MODEL]] [--prior_sig [PRIOR_SIG]] [--epochs [EPOCHS]] [--lr [LR]] [--n_samples [N_SAMPLES]] [--models_dir [MODELS_DIR]] [--results_dir [RESULTS_DIR]]
 ```
-
-Best results are obtained with a Laplace prior.
-
 
 For an explanation of the script's arguments:
 ```bash
-python train_BayesByBackprop.py -h
+python train_BayesByBackprop_MNIST.py -h
 ```
 
+
+
+Best results are obtained with a Laplace prior.
 
 ### Local Reparametrisation Trick
 (https://arxiv.org/abs/1506.02557)
@@ -44,7 +44,7 @@ Bayes By Backprop inference where the mean and variance of activations
 
 Train a model on MNIST:
 ```bash
-python train_BayesByBackprop.py --model Local_Reparam --prior_sig [PRIOR_SIG] --epochs [EPOCHS] --lr [LR] --n_samples [N_SAMPLES] --models_dir [MODELS_DIR] --results_dir [RESULTS_DIR]
+python train_BayesByBackprop_MNIST.py --model Local_Reparam [--prior_sig [PRIOR_SIG]] [--epochs [EPOCHS]] [--lr [LR]] [--n_samples [N_SAMPLES]] [--models_dir [MODELS_DIR]] [--results_dir [RESULTS_DIR]]
 ```
 
 
@@ -52,11 +52,28 @@ python train_BayesByBackprop.py --model Local_Reparam --prior_sig [PRIOR_SIG] --
 (https://arxiv.org/abs/1506.02142)
 
 ## Stochastic Gradient Langevin Dynamics
-
 (https://www.ics.uci.edu/~welling/publications/papers/stoclangevin_v6.pdf)
+
+Train a model on MNIST:
+```bash
+train_SGLD_MNIST.py [--use_preconditioning [USE_PRECONDITIONING]] [--prior_sig [PRIOR_SIG]] [--epochs [EPOCHS]] [--lr [LR]] [--models_dir [MODELS_DIR]] [--results_dir [RESULTS_DIR]]
+```
 
 ### pSGLD
 (https://arxiv.org/abs/1512.07666)
+
+SGLD with RMSprop preconditioning.
+
+Train a model on MNIST:
+```bash
+train_SGLD_MNIST.py --use_preconditioning True [--prior_sig [PRIOR_SIG]] [--epochs [EPOCHS]] [--lr [LR]] [--models_dir [MODELS_DIR]] [--results_dir [RESULTS_DIR]]
+```
+
+For an explanation of the script's arguments:
+```bash
+python train_SGLD_MNIST.py -h
+```
+
 
 ## Results
 
