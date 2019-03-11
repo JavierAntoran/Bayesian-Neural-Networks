@@ -33,9 +33,9 @@ args = parser.parse_args()
 
 
 # Where to save models weights
-models_dir = args['models_dir']
+models_dir = args.models_dir
 # Where to save plots and error, accuracy vectors
-results_dir = args['results_dir']
+results_dir = args.results_dir
 
 mkdir(models_dir)
 mkdir(results_dir)
@@ -43,7 +43,7 @@ mkdir(results_dir)
 # train config
 NTrainPointsMNIST = 60000
 batch_size = 100
-nb_epochs = args['epochs']
+nb_epochs = args.epochs
 log_interval = 1
 
 
@@ -85,25 +85,25 @@ else:
 # net dims
 cprint('c', '\nNetwork:')
 
-lr = args['lr']
-nsamples = args['n_samples']  # How many samples to estimate ELBO with at each iteration
+lr = args.lr
+nsamples = args.n_samples  # How many samples to estimate ELBO with at each iteration
 ########################################################################################
 
-if args['model'] == 'Local_Reparam':
-    BBP_Bayes_Net_LR(lr=lr, channels_in=1, side_in=28, cuda=use_cuda, classes=10, batch_size=batch_size,
-                     Nbatches=(NTrainPointsMNIST / batch_size), nhid=1200, prior_sig=args['prior_sig'])
-elif args['model'] == 'Laplace_prior':
+if args.model == 'Local_Reparam':
+    net = BBP_Bayes_Net_LR(lr=lr, channels_in=1, side_in=28, cuda=use_cuda, classes=10, batch_size=batch_size,
+                     Nbatches=(NTrainPointsMNIST / batch_size), nhid=1200, prior_sig=args.prior_sig)
+elif args.model == 'Laplace_prior':
     net = BBP_Bayes_Net(lr=lr, channels_in=1, side_in=28, cuda=use_cuda, classes=10, batch_size=batch_size,
                         Nbatches=(NTrainPointsMNIST / batch_size), nhid=1200,
-                        prior_instance=laplace_prior(mu=0, b=args['prior_sig']))
-elif args['model'] == 'Gaussian_prior':
+                        prior_instance=laplace_prior(mu=0, b=args.prior_sig))
+elif args.model == 'Gaussian_prior':
     net = BBP_Bayes_Net(lr=lr, channels_in=1, side_in=28, cuda=use_cuda, classes=10, batch_size=batch_size,
                         Nbatches=(NTrainPointsMNIST / batch_size), nhid=1200,
-                        prior_instance=isotropic_gauss_prior(mu=0, sigma=args['prior_sig']))
-elif args['model'] == 'GMM_prior':
+                        prior_instance=isotropic_gauss_prior(mu=0, sigma=args.prior_sig))
+elif args.model == 'GMM_prior':
     net = BBP_Bayes_Net(lr=lr, channels_in=1, side_in=28, cuda=use_cuda, classes=10, batch_size=batch_size,
                         Nbatches=(NTrainPointsMNIST / batch_size), nhid=1200,
-                        prior_instance=spike_slab_2GMM(mu1=0, mu2=0, sigma1=args['prior_sig'], sigma2=0.0005, pi=0.75))
+                        prior_instance=spike_slab_2GMM(mu1=0, mu2=0, sigma1=args.prior_sig, sigma2=0.0005, pi=0.75))
 else:
     print('Invalid model type')
     exit(1)
