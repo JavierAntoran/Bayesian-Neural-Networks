@@ -1,16 +1,15 @@
 from __future__ import division, print_function
-
 import time
 import torch.utils.data
 from torchvision import transforms, datasets
+import argparse
 import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
-
 from src.Bayes_By_Backprop.model import *
 from src.Bayes_By_Backprop_Local_Reparametrization.model import *
 
-import argparse
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+
 
 parser = argparse.ArgumentParser(description='Train Bayesian Neural Net on MNIST with Variational Inference')
 parser.add_argument('--model', type=str, nargs='?', action='store', default='Local_Reparam',
@@ -108,11 +107,9 @@ else:
     print('Invalid model type')
     exit(1)
 
-
-epoch = 0
-
 ## ---------------------------------------------------------------------------------------------------------------------
 # train
+epoch = 0
 cprint('c', '\nTrain:')
 
 print('  init cost variables:')
@@ -128,14 +125,18 @@ nb_its_dev = 1
 
 tic0 = time.time()
 for i in range(epoch, nb_epochs):
+    # We draw more samples on the first epoch in order to ensure convergence
+    if i == 0:
+        ELBO_samples = 10
+    else:
+        ELBO_samples = nsamples
 
     net.set_mode_train(True)
-
     tic = time.time()
     nb_samples = 0
 
     for x, y in trainloader:
-        cost_dkl, cost_pred, err = net.fit(x, y, samples=nsamples)
+        cost_dkl, cost_pred, err = net.fit(x, y, samples=ELBO_samples)
 
         err_train[i] += err
         kl_cost_train[i] += cost_dkl
