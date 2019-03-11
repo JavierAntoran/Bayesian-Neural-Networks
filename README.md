@@ -1,6 +1,6 @@
 # Bayesian Neural Networks
 
-Pytorch implementations for the following methods:
+Pytorch implementations for the following approximate inference methods:
 
 * [Bayes by Backprop](#bayes-by-backprop)
 * [Bayes by Backprop + Local Reparametrisation Trick](#local-reparametrisation-trick)
