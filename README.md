@@ -7,6 +7,7 @@ Pytorch implementations for the following approximate inference methods:
 * [MC dropout](#mc-dropout)
 * [Stochastic Gradient Langevin Dynamics](#stochastic-gradient-langevin-dynamics)
 * [Preconditioned SGLD](#pSGLD)
+* [Bootstrap MAP Ensemble](#bootstrap-map-ensemble)
 
 ### Prerequisites
 * PyTorch (https://pytorch.org)
@@ -15,14 +16,13 @@ Pytorch implementations for the following approximate inference methods:
 
 ## Approximate inference in Neural Networks
 
-## Bayes by Backprop
+## Bayes by Backprop (BBP)
 (https://arxiv.org/abs/1505.05424)
 
 Train a model on MNIST:
 ```bash
 python train_BayesByBackprop_MNIST.py [--model [MODEL]] [--prior_sig [PRIOR_SIG]] [--epochs [EPOCHS]] [--lr [LR]] [--n_samples [N_SAMPLES]] [--models_dir [MODELS_DIR]] [--results_dir [RESULTS_DIR]]
 ```
-
 For an explanation of the script's arguments:
 ```bash
 python train_BayesByBackprop_MNIST.py -h
@@ -47,33 +47,51 @@ Train a model on MNIST:
 python train_BayesByBackprop_MNIST.py --model Local_Reparam [--prior_sig [PRIOR_SIG]] [--epochs [EPOCHS]] [--lr [LR]] [--n_samples [N_SAMPLES]] [--models_dir [MODELS_DIR]] [--results_dir [RESULTS_DIR]]
 ```
 
-
 ## MC Dropout
 (https://arxiv.org/abs/1506.02142)
 
-## Stochastic Gradient Langevin Dynamics
+A fixed dropout rate of 0.5 is set.
+
+Train a model on MNIST:
+```bash
+python train_MCDropout_MNIST.py [--weight_decay [WEIGHT_DECAY]] [--epochs [EPOCHS]] [--lr [LR]] [--models_dir [MODELS_DIR]] [--results_dir [RESULTS_DIR]]
+```
+For an explanation of the script's arguments:
+```bash
+python train_MCDropout_MNIST.py -h
+```
+
+
+## Stochastic Gradient Langevin Dynamics (SGLD)
 (https://www.ics.uci.edu/~welling/publications/papers/stoclangevin_v6.pdf)
+
+In order to converge to the true posterior over w, the learning rate
+should be annealed according to the [Robbins-Monro](https://en.wikipedia.org/wiki/Stochastic_approximation)
+ conditions. In practise, we use a fixed learning rate.
 
 Train a model on MNIST:
 ```bash
 train_SGLD_MNIST.py [--use_preconditioning [USE_PRECONDITIONING]] [--prior_sig [PRIOR_SIG]] [--epochs [EPOCHS]] [--lr [LR]] [--models_dir [MODELS_DIR]] [--results_dir [RESULTS_DIR]]
 ```
+For an explanation of the script's arguments:
+```bash
+python train_SGLD_MNIST.py -h
+```
 
 ### pSGLD
 (https://arxiv.org/abs/1512.07666)
 
-SGLD with RMSprop preconditioning.
+SGLD with RMSprop preconditioning. A higher learning rate should be used
+than for vanilla SGLD.
 
 Train a model on MNIST:
 ```bash
 train_SGLD_MNIST.py --use_preconditioning True [--prior_sig [PRIOR_SIG]] [--epochs [EPOCHS]] [--lr [LR]] [--models_dir [MODELS_DIR]] [--results_dir [RESULTS_DIR]]
 ```
 
-For an explanation of the script's arguments:
-```bash
-python train_SGLD_MNIST.py -h
-```
+## Bootstrap MAP Ensemble
 
+Multiple networks are trained on subsamples of the dataset.
 
 ## Results
 
@@ -82,17 +100,16 @@ python train_SGLD_MNIST.py -h
 W is marginalised with 100 samples of the weights for all models except
 MAP, where only one set of weights is used.
 
-|      MNIST     	|   MAP   	| Bootstrap  Ensemble 	| BBBP  Gaussian 	| BBBP  GMM 	| BBBP  Laplace 	| BBBP Local  Reparam 	| MC Dropout 	|   SGLD  	|  pSGLD  	|
+|      MNIST     	|   MAP   	| MAP  Ensemble 	| BBBP  Gaussian 	| BBBP  GMM 	| BBBP  Laplace 	| BBBP Local Reparam 	| MC Dropout 	|   SGLD  	|  pSGLD  	|
 |:--------------:	|:-------:	|:-------------------:	|:--------------:	|:---------:	|:-------------:	|:-------------------:	|:----------:	|:-------:	|:-------:	|
-| Log Likelihood 	| -572.90 	|       -496.54       	|    -1100.29    	|  -1008.28 	|    -892.85    	|       -1086.43      	|  -435.458  	| -828.29 	| -661.25 	|
+| Log Like	| -572.90 	|       -496.54       	|    -1100.29    	|  -1008.28 	|    -892.85    	|       -1086.43      	|  -435.458  	| -828.29 	| -661.25 	|
 |    Error \%    	|   1.58  	|         1.53        	|      2.60      	|    2.38   	|      2.28     	|         2.61        	|    1.37    	|   1.76  	|   1.76  	|
 
 ### MNIST Uncertainty
 
-### Gaussian Process Regression Uncertainty
+### Homoscedastic Regression
 
-### Multi-armed bandits
-Exploration exploitation trade off
+### Heteroscedastic Regression
 
 ### Weight Distributions
 

@@ -82,7 +82,7 @@ cprint('c', '\nNetwork:')
 lr = args.lr
 ########################################################################################
 
-net = MC_drop_net(lr=lr, channels_in=3, side_in=28, cuda=use_cuda, classes=10, batch_size=batch_size,
+net = MC_drop_net(lr=lr, channels_in=1, side_in=28, cuda=use_cuda, classes=10, batch_size=batch_size,
                   weight_decay=args.weight_decay, n_hid=1200)
 
 ## ---------------------------------------------------------------------------------------------------------------------
