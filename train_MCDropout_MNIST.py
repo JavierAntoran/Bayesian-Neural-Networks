@@ -4,25 +4,24 @@ import torch.utils.data
 from torchvision import transforms, datasets
 import argparse
 import matplotlib
-from src.Stochastic_Gradient_Langevin_Dynamics.model import *
+from src.MC_dropout.model import *
 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 
-parser = argparse.ArgumentParser(description='Train Bayesian Neural Net on MNIST with Stochastic Gradient Langevin Dynamics')
-parser.add_argument('--use_preconditioning', type=bool, nargs='?', action='store', default=True,
-                    help='Use RMSprop preconditioning. Default: True.')
-parser.add_argument('--prior_sig', type=float, nargs='?', action='store', default=0.1,
-                    help='Standard deviation of prior. Default: 0.1.')
-parser.add_argument('--epochs', type=int, nargs='?', action='store', default=200,
-                    help='How many epochs to train. Default: 200.')
+parser = argparse.ArgumentParser(description='Train Bayesian Neural Net on MNIST with MC Dropout Variational Inference')
+
+parser.add_argument('--weight_decay', type=float, nargs='?', action='store', default=1,
+                    help='Specify the precision of an isotropic Gaussian prior. Default: 1.')
+parser.add_argument('--epochs', type=int, nargs='?', action='store', default=60,
+                    help='How many epochs to train. Default: 60.')
 parser.add_argument('--lr', type=float, nargs='?', action='store', default=1e-3,
-                    help='learning rate. I recommend 1e-3 if preconditioning, else 1e-4. Default: 1e-3.')
-parser.add_argument('--models_dir', type=str, nargs='?', action='store', default='SGLD_model',
-                    help='Where to save learnt weights and train vectors. Default: \'SGLD_models\'.')
-parser.add_argument('--results_dir', type=str, nargs='?', action='store', default='SGLD_results',
-                    help='Where to save learnt training plots. Default: \'SGLD_results\'.')
+                    help='learning rate. Default: 1e-3.')
+parser.add_argument('--models_dir', type=str, nargs='?', action='store', default='MCdrop_model',
+                    help='Where to save learnt weights and train vectors. Default: \'MCdrop_models\'.')
+parser.add_argument('--results_dir', type=str, nargs='?', action='store', default='MCdrop_results',
+                    help='Where to save learnt training plots. Default: \'MCdrop_results\'.')
 args = parser.parse_args()
 
 
@@ -83,23 +82,13 @@ cprint('c', '\nNetwork:')
 lr = args.lr
 ########################################################################################
 
-if args.use_preconditioning:
-    net = Net_langevin(lr=lr, channels_in=1, side_in=28, cuda=use_cuda, classes=10,
-                       prior_sig=args.prior_sig, N_train=NTrainPointsMNIST, nhid=1200, use_p=True)
-else:
-    net = Net_langevin(lr=lr, channels_in=1, side_in=28, cuda=use_cuda, classes=10,
-                       prior_sig=args.prior_sig, N_train=NTrainPointsMNIST, nhid=1200, use_p=False)
+net = MC_drop_net(lr=lr, channels_in=3, side_in=28, cuda=use_cuda, classes=10, batch_size=batch_size,
+                  weight_decay=args.weight_decay, n_hid=1200)
 
 ## ---------------------------------------------------------------------------------------------------------------------
 # train
 epoch = 0
 cprint('c', '\nTrain:')
-
-## weight saving parameters #######
-start_save = 15
-save_every = 2  # We sample every 2 epochs as I have found samples to be correlated after only 1
-N_saves = 100  # Max number of saves
-###################################
 
 print('  init cost variables:')
 kl_cost_train = np.zeros(nb_epochs)
@@ -135,9 +124,6 @@ for i in range(epoch, nb_epochs):
     print("it %d/%d, Jtr_pred = %f, err = %f, " % (i, nb_epochs, pred_cost_train[i], err_train[i]), end="")
     cprint('r', '   time: %f seconds\n' % (toc - tic))
 
-    # ---- save weights
-    if i >= start_save and i % save_every == 0:
-        net.save_sampled_net(max_samples=N_saves)
 
     # ---- dev
     if i % nb_its_dev == 0:
@@ -164,8 +150,7 @@ toc0 = time.time()
 runtime_per_it = (toc0 - tic0) / float(nb_epochs)
 cprint('r', '   average time: %f seconds\n' % runtime_per_it)
 
-# Save weight samples from the posterior
-save_object(net.weight_set_samples, models_dir+'/state_dicts.pkl')
+net.save(models_dir+'/theta_last.dat')
 
 ## ---------------------------------------------------------------------------------------------------------------------
 # results
