@@ -124,10 +124,20 @@ MAP, where only one set of weights is used.
 | Log Like	| -572.9 	|       -496.54       	|    -1100.29    	|  -1008.28 	|    -892.85    	|       -1086.43      	|  -435.458  	| -828.29 	| -661.25 	|
 |    Error \%    	|   1.58  	|         1.53        	|      2.60      	|    2.38   	|      2.28     	|         2.61        	|    1.37    	|   1.76  	|   1.76  	|
 
-MNIST test results for methods under consideration. We approximate
+MNIST test results for methods under consideration. Estensive hyperparameter
+tunning has not been performed. We approximate
  the posterior predictive distribution with 100 MC samples. We use a FC
   network with two 1200 unit ReLU layers. If unspecified, the prior is
-   Gaussian. P-SGLD uses RMSprop preconditioning.
+   Gaussian with std=0.1. P-SGLD uses RMSprop preconditioning.
+
+ [The original paper](https://arxiv.org/abs/1505.05424) for Bayes By Backprop
+ reports around 1% error on MNIST. We find that this result is attainable
+ with extensive hyperparameter and initialisation tuning and with a training schedule of 600+
+ epochs. However, using an out of the box initialisation and prior (same for all
+ methods) we obtain the above results.
+
+
+
 ### MNIST Uncertainty
 
 \#TODO
