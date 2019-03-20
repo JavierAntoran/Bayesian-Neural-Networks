@@ -6,7 +6,10 @@ import torch.utils.data as data
 import numpy as np
 import os
 import sys
-import cPickle as pickle
+try:
+    import cPickle as pickle
+except:
+    import pickle
 
 def lead_object(filename):
     with open(filename, 'rb') as input:
