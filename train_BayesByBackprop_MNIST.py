@@ -5,6 +5,7 @@ from torchvision import transforms, datasets
 import argparse
 import matplotlib
 from src.Bayes_By_Backprop.model import *
+from src.Bayes_By_Backprop_Local_Reparametrization.model import *
 
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
