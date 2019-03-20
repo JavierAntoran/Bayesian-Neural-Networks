@@ -19,12 +19,19 @@ We also provide code for:
 The project is written in python 2.7. If CUDA is available, it will be
 used automatically. The models can also run on CPU as they are not excessively big.
 
-## Approximate Inference in Neural Networks
-
 ## Usage
 
 ### Structure
-\# TODO
+
+*train_(ModelName)_(Dataset).py*: Trains (ModelName) on (Dataset). Training
+metrics and model weights will be saved to the specified directories.
+
+*src/*: General utilities and model definitions.
+
+*Notebooks/*: An asortment of notebooks which allow for model training, evaluation and
+running of digit rotation uncertainty experiments. They also allow for weight
+distribution plotting and weight pruning.  They allow for loading of pre-trained models
+for experimentation.
 
 ### Bayes by Backprop (BBP)
 (https://arxiv.org/abs/1505.05424)
@@ -37,8 +44,6 @@ For an explanation of the script's arguments:
 ```bash
 python train_BayesByBackprop_MNIST.py -h
 ```
-
-
 
 Best results are obtained with a Laplace prior.
 
@@ -112,6 +117,22 @@ For an explanation of the script's arguments:
 python train_Bootrap_Ensemble_MNIST.py -h
 ```
 
+## Approximate Inference in Neural Networks
+
+Map inference provides a point estimate of parameter values. When provided with
+out of distribution inputs, such as rotated digits, these models then to
+make wrong predictions with high confidence.
+
+<img src="images/MAP.png" width="430" height="270"/>
+
+### Uncertainty Decomposition
+We can measure uncertainty in our models' predictions through predictive entropy.
+We can decompose this term in order to distinguish between 2 types of uncertainty.
+Uncertainty caused by noise in the data, or **Aleatoric uncertainty**, can be
+ quantified as the expected entropy of model predictions. Model uncertainty
+ or **Epistemic uncertainty** can be measured as the difference between total entropy
+ and aleatoric entropy.
+
 ## Results
 
 ### MNIST Classification
@@ -134,13 +155,13 @@ tunning has not been performed. We approximate
  reports around 1% error on MNIST. We find that this result is attainable
  with extensive hyperparameter and initialisation tuning and with a training schedule of 600+
  epochs. However, using an out of the box initialisation and prior (same for all
- methods) we obtain the above results.
+ methods) and running for around 200 epochs we obtain the above results.
 
 
 
 ### MNIST Uncertainty
 
-\#TODO
+<img src="images/rotation_uncertainty.png" width="1130" height="260"/>
 
 ### Homoscedastic Regression
 
