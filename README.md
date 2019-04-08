@@ -170,7 +170,7 @@ tunning has not been performed. We approximate
 Total, aleatoric and epistemic uncertainties obtained when
 creating OOD samples by augmenting the MNIST test set with rotations:
 
-<img src="images/all_rotations.png" width="1130" height="530"/>
+<img src="images/all_rotations.png" width="900" height="420"/>
 
 Total and epistemic uncertainties obtained by testing our models, - which 
 have been trained on MNIST -, on the KMNIST dataset:
@@ -184,7 +184,7 @@ have been trained on MNIST -, on the KMNIST dataset:
 Total, aleatoric and epistemic uncertainties obtained when
 feeding our models with adversarial samples (fgsm).
 
-<img src="images/adv_entropy.png" width="1130" height="530"/>
+<img src="images/adv_entropy.png" width="900" height="420"/>
 
 
 ### Homoscedastic Regression
