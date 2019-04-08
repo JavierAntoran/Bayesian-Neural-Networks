@@ -175,7 +175,7 @@ creating OOD samples by augmenting the MNIST test set with rotations:
 Total and epistemic uncertainties obtained by testing our models, - which 
 have been trained on MNIST -, on the KMNIST dataset:
 
-<img src="images/KMNIST_entropies.png" width="770" height="280"/>
+<img src="images/KMNIST_entropies.png" width="770" height="240"/>
 
 ### Adversarial robustness
 
