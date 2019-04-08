@@ -1,3 +1,4 @@
+
 # Bayesian Neural Networks
 
 Pytorch implementations for the following approximate inference methods:
@@ -7,6 +8,7 @@ Pytorch implementations for the following approximate inference methods:
 * [MC dropout](#mc-dropout)
 * [Stochastic Gradient Langevin Dynamics](#stochastic-gradient-langevin-dynamics)
 * [Preconditioned SGLD](#pSGLD)
+* Kronecker Factorised Laplace Approximation (Coming Soon)
 
 We also provide code for:
 * [Bootstrap MAP Ensemble](#bootstrap-map-ensemble)
@@ -153,15 +155,37 @@ tunning has not been performed. We approximate
 
  [The original paper](https://arxiv.org/abs/1505.05424) for Bayes By Backprop
  reports around 1% error on MNIST. We find that this result is attainable
- with extensive hyperparameter and initialisation tuning and with a training schedule of 600+
- epochs. However, using an out of the box initialisation and prior (same for all
- methods) and running for around 200 epochs we obtain the above results.
+ only if approximate posterior variances are initialised to be very small (BBP Gauss 2).
+ In this scenario, the distributions over weights resemble deltas, giving 
+ good predictive performance but bad uncertainty estimates. 
+ However, when initialising the variances to match the prior (BBP Gauss 1), we obtain the above results.
+ The training curves for both of these hyperparameter configuration schemes
+ are shown below:
 
+<img src="images/BBP_train.png" width="500" height="420"/>
 
 
 ### MNIST Uncertainty
 
-<img src="images/rotation_uncertainty.png" width="1130" height="260"/>
+Total, aleatoric and epistemic uncertainties obtained when
+creating OOD samples by augmenting the MNIST test set with rotations:
+
+<img src="images/all_rotations.png" width="1130" height="530"/>
+
+Total and epistemic uncertainties obtained by testing our models, - which 
+have been trained on MNIST -, on the KMNIST dataset:
+
+<img src="images/KMNIST_entropies.png" width="770" height="280"/>
+
+### Adversarial robustness
+
+<img src="images/adv_robustness.png" width="600" height="280"/>
+
+Total, aleatoric and epistemic uncertainties obtained when
+feeding our models with adversarial samples (fgsm).
+
+<img src="images/adv_entropy.png" width="1130" height="530"/>
+
 
 ### Homoscedastic Regression
 
