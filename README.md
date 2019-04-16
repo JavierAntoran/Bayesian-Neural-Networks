@@ -179,12 +179,12 @@ have been trained on MNIST -, on the KMNIST dataset:
 
 ### Adversarial robustness
 
-<img src="images/adv_robustness.png" width="600" height="280"/>
+<img src="https://imgur.com/R61K4Ab" width="600" height="280"/>
 
 Total, aleatoric and epistemic uncertainties obtained when
 feeding our models with adversarial samples (fgsm).
 
-<img src="images/adv_entropy.png" width="900" height="420"/>
+<img src="https://imgur.com/Mc484A3" width="900" height="420"/>
 
 
 ### Homoscedastic Regression
