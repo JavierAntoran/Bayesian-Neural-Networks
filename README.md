@@ -3,12 +3,12 @@
 
 Pytorch implementations for the following approximate inference methods:
 
-* [Bayes by Backprop](#bayes-by-backprop)
+* [Bayes by Backprop](#bayes-by-backprop-bbp)
 * [Bayes by Backprop + Local Reparametrisation Trick](#local-reparametrisation-trick)
 * [MC dropout](#mc-dropout)
-* [Stochastic Gradient Langevin Dynamics](#stochastic-gradient-langevin-dynamics)
-* [Preconditioned SGLD](#pSGLD)
-* Kronecker Factorised Laplace Approximation (Coming Soon)
+* [Stochastic Gradient Langevin Dynamics](#stochastic-gradient-langevin-dynamics-sgld)
+* [Preconditioned SGLD](#psgld)
+* [Kronecker-Factorised Laplace Approximation](#kronecker-factorised-laplace)
 
 We also provide code for:
 * [Bootstrap MAP Ensemble](#bootstrap-map-ensemble)
@@ -118,6 +118,10 @@ For an explanation of the script's arguments:
 ```bash
 python train_Bootrap_Ensemble_MNIST.py -h
 ```
+
+## Kronecker-Factorised Laplace
+(https://openreview.net/pdf?id=Skdvd2xAZ)
+
 
 ## Approximate Inference in Neural Networks
 
