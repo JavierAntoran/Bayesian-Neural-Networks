@@ -122,6 +122,28 @@ python train_Bootrap_Ensemble_MNIST.py -h
 ## Kronecker-Factorised Laplace
 (https://openreview.net/pdf?id=Skdvd2xAZ)
 
+Train a MAP network and then calculate a second order taylor series aproxiamtion
+ to the curvature around a mode of the posterior. A block diagonal Hessian
+ approximation is used, where only intra-layer dependencies are accounted
+ for. The Hessian is further approximated as the kronecker product of the 
+ expectation of a single datapoint's Hessian factors. Approximating the Hessian
+ can take a while. Fortunately it only needs to be done once. 
+
+Train a MAP network on MNIST and approximate Hessian:
+```bash
+python train_KFLaplace_MNIST.py [--weight_decay [WEIGHT_DECAY]] [--hessian_diag_sig [HESSIAN_DIAG_SIG]] [--epochs [EPOCHS]] [--lr [LR]] [--models_dir [MODELS_DIR]] [--results_dir [RESULTS_DIR]]
+```
+
+For an explanation of the script's arguments:
+```bash
+python train_KFLaplace_MNIST.py -h
+```
+
+Note that we save the unscaled and uninverted Hessian factors. This will
+allow for computationally cheap changes to the prior at inference time as the
+Hessian will not need to be re-computed. Inference will require inverting
+ the approximated Hessian factors and sampling from a matrix normal distribution.
+ This is shown in: 
 
 ## Approximate Inference in Neural Networks
 
@@ -192,6 +214,8 @@ feeding our models with adversarial samples (fgsm).
 
 
 ### Homoscedastic Regression
+
+(Code for Regression will be coming soon)
 
 <img src="images/homoscedastic_regression.png" width="1130" height="245"/>
 
