@@ -1,12 +1,14 @@
+
 # Bayesian Neural Networks
 
 Pytorch implementations for the following approximate inference methods:
 
-* [Bayes by Backprop](#bayes-by-backprop)
+* [Bayes by Backprop](#bayes-by-backprop-bbp)
 * [Bayes by Backprop + Local Reparametrisation Trick](#local-reparametrisation-trick)
 * [MC dropout](#mc-dropout)
-* [Stochastic Gradient Langevin Dynamics](#stochastic-gradient-langevin-dynamics)
-* [Preconditioned SGLD](#pSGLD)
+* [Stochastic Gradient Langevin Dynamics](#stochastic-gradient-langevin-dynamics-sgld)
+* [Preconditioned SGLD](#psgld)
+* [Kronecker-Factorised Laplace Approximation](#kronecker-factorised-laplace)
 
 We also provide code for:
 * [Bootstrap MAP Ensemble](#bootstrap-map-ensemble)
@@ -117,6 +119,32 @@ For an explanation of the script's arguments:
 python train_Bootrap_Ensemble_MNIST.py -h
 ```
 
+## Kronecker-Factorised Laplace
+(https://openreview.net/pdf?id=Skdvd2xAZ)
+
+Train a MAP network and then calculate a second order taylor series aproxiamtion
+ to the curvature around a mode of the posterior. A block diagonal Hessian
+ approximation is used, where only intra-layer dependencies are accounted
+ for. The Hessian is further approximated as the kronecker product of the 
+ expectation of a single datapoint's Hessian factors. Approximating the Hessian
+ can take a while. Fortunately it only needs to be done once. 
+
+Train a MAP network on MNIST and approximate Hessian:
+```bash
+python train_KFLaplace_MNIST.py [--weight_decay [WEIGHT_DECAY]] [--hessian_diag_sig [HESSIAN_DIAG_SIG]] [--epochs [EPOCHS]] [--lr [LR]] [--models_dir [MODELS_DIR]] [--results_dir [RESULTS_DIR]]
+```
+
+For an explanation of the script's arguments:
+```bash
+python train_KFLaplace_MNIST.py -h
+```
+
+Note that we save the unscaled and uninverted Hessian factors. This will
+allow for computationally cheap changes to the prior at inference time as the
+Hessian will not need to be re-computed. Inference will require inverting
+ the approximated Hessian factors and sampling from a matrix normal distribution.
+ This is shown in: 
+
 ## Approximate Inference in Neural Networks
 
 Map inference provides a point estimate of parameter values. When provided with
@@ -153,17 +181,41 @@ tunning has not been performed. We approximate
 
  [The original paper](https://arxiv.org/abs/1505.05424) for Bayes By Backprop
  reports around 1% error on MNIST. We find that this result is attainable
- with extensive hyperparameter and initialisation tuning and with a training schedule of 600+
- epochs. However, using an out of the box initialisation and prior (same for all
- methods) and running for around 200 epochs we obtain the above results.
+ only if approximate posterior variances are initialised to be very small (BBP Gauss 2).
+ In this scenario, the distributions over weights resemble deltas, giving 
+ good predictive performance but bad uncertainty estimates. 
+ However, when initialising the variances to match the prior (BBP Gauss 1), we obtain the above results.
+ The training curves for both of these hyperparameter configuration schemes
+ are shown below:
 
+<img src="images/BBP_train.png" width="500" height="420"/>
 
 
 ### MNIST Uncertainty
 
-<img src="images/rotation_uncertainty.png" width="1130" height="260"/>
+Total, aleatoric and epistemic uncertainties obtained when
+creating OOD samples by augmenting the MNIST test set with rotations:
+
+<img src="images/all_rotations.png" width="900" height="420"/>
+
+Total and epistemic uncertainties obtained by testing our models, - which 
+have been trained on MNIST -, on the KMNIST dataset:
+
+<img src="images/KMNIST_entropies.png" width="770" height="240"/>
+
+### Adversarial robustness
+
+<img src="https://i.imgur.com/R61K4Ab.png" width="600" height="280"/>
+
+Total, aleatoric and epistemic uncertainties obtained when
+feeding our models with adversarial samples (fgsm).
+
+<img src="https://i.imgur.com/Mc484A3.png" width="900" height="420"/>
+
 
 ### Homoscedastic Regression
+
+(Code for Regression will be coming soon)
 
 <img src="images/homoscedastic_regression.png" width="1130" height="245"/>
 
