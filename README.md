@@ -143,7 +143,7 @@ Note that we save the unscaled and uninverted Hessian factors. This will
 allow for computationally cheap changes to the prior at inference time as the
 Hessian will not need to be re-computed. Inference will require inverting
  the approximated Hessian factors and sampling from a matrix normal distribution.
- This is shown in: 
+ This is shown in (notebooks/KFAC_Laplace_MNIST.ipynb)[https://github.com/JavierAntoran/Bayesian-Neural-Networks/blob/master/notebooks/KFAC_Laplace_MNIST.ipynb]
 
 ## Approximate Inference in Neural Networks
 
