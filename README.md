@@ -1,5 +1,9 @@
 
 # Bayesian Neural Networks
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/JavierAntoran/Bayesian-Neural-Networks/blob/master/LICENSE) [![Python 2.7+](https://img.shields.io/badge/python-2.7+-blue.svg)](https://www.python.org/downloads/release/python-2716/)
+[![Pytorch 1.0](https://img.shields.io/badge/pytorch-1.0.1-blue.svg)](https://pytorch.org/)
+
+
 
 Pytorch implementations for the following approximate inference methods:
 
