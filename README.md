@@ -41,8 +41,7 @@ All experiments are available as Jupyter notebooks.
  on (ExperimentType), i.e. homoscedastic/heteroscedastic. The heteroscedastic
   notebooks contain both toy and UCI dataset experiments for a given (ModelName).
 
-We wrote these notebooks and did all regression experiments
- in [Google Colab](https://colab.research.google.com/). This means that
+We also provide [Google Colab](https://colab.research.google.com/) notebooks. This means that
   you can run on a GPU (for free!). No modifications required - all dependencies 
   and datasets are added from within the notebooks - except for selecting 
   Runtime -> Change runtime type -> Hardware accelerator -> GPU.
@@ -65,7 +64,7 @@ for experimentation.
 ### Bayes by Backprop (BBP)
 (https://arxiv.org/abs/1505.05424)
 
-Notebooks with regression models: [BBP homoscedastic](https://colab.research.google.com/drive/1K1I_UNRFwPt9l6RRkp8IYg1504PR9q4L) / [heteroscedastic](https://colab.research.google.com/drive/13oTnT6oKnB6NNBPVAczx8X-QEot2hfp9)
+Colab notebooks with regression models: [BBP homoscedastic](https://colab.research.google.com/drive/1K1I_UNRFwPt9l6RRkp8IYg1504PR9q4L) / [heteroscedastic](https://colab.research.google.com/drive/13oTnT6oKnB6NNBPVAczx8X-QEot2hfp9)
 
 Train a model on MNIST:
 ```bash
@@ -98,7 +97,7 @@ python train_BayesByBackprop_MNIST.py --model Local_Reparam [--prior_sig [PRIOR_
 
 A fixed dropout rate of 0.5 is set.
 
-Notebooks with regression models: [MC Dropout homoscedastic](https://colab.research.google.com/drive/11knF0-7F7hK3Yhsj8VkG9fHbdB-LvtpQ) [heteroscedastic](https://colab.research.google.com/drive/11wYjIF9_mPTpJJ-M-TqLJ1X6sfeXtrOd)
+Colab notebooks with regression models: [MC Dropout homoscedastic](https://colab.research.google.com/drive/11knF0-7F7hK3Yhsj8VkG9fHbdB-LvtpQ) [heteroscedastic](https://colab.research.google.com/drive/11wYjIF9_mPTpJJ-M-TqLJ1X6sfeXtrOd)
 
 Train a model on MNIST:
 ```bash
@@ -117,7 +116,7 @@ In order to converge to the true posterior over w, the learning rate
 should be annealed according to the [Robbins-Monro](https://en.wikipedia.org/wiki/Stochastic_approximation)
  conditions. In practise, we use a fixed learning rate.
  
-Notebooks with regression models: [SGLD homoscedastic](https://colab.research.google.com/drive/1vV5bsp7o6SyhAXErHwUC1FYxb-9Dc9SK) / [heteroscedastic](https://colab.research.google.com/drive/1Qk-gGWLwVrYc6hn7-EKIbkIYeZoWBx4f)
+Colab notebooks with regression models: [SGLD homoscedastic](https://colab.research.google.com/drive/1vV5bsp7o6SyhAXErHwUC1FYxb-9Dc9SK) / [heteroscedastic](https://colab.research.google.com/drive/1Qk-gGWLwVrYc6hn7-EKIbkIYeZoWBx4f)
 
 Train a model on MNIST:
 ```bash
@@ -143,7 +142,7 @@ python train_SGLD_MNIST.py --use_preconditioning True [--prior_sig [PRIOR_SIG]] 
 
 Multiple networks are trained on subsamples of the dataset.
 
-Notebooks with regression models: [MAP Ensemble homoscedastic](https://colab.research.google.com/drive/1iA3IUjaEHlb0XpLUF_WafbMS70UQnSaA) / [heteroscedastic](https://colab.research.google.com/drive/1B14--H3mduShIDb7M-CPbDOG8lOu2jvK)
+Colab notebooks with regression models: [MAP Ensemble homoscedastic](https://colab.research.google.com/drive/1iA3IUjaEHlb0XpLUF_WafbMS70UQnSaA) / [heteroscedastic](https://colab.research.google.com/drive/1B14--H3mduShIDb7M-CPbDOG8lOu2jvK)
 
 Train an ensemble on MNIST:
 ```bash
