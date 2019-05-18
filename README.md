@@ -238,9 +238,6 @@ to the 10-fold cross validation mean and standard deviations respectively.
 
 <p float="center">
   <img src="images/uci_regression_log_liks.png" float="center" width="400" />
-</p>
-
-<p float="center">
   <img src="images/uci_regression_rmses.png" float="center" width="400" />
 </p>
 
