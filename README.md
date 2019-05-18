@@ -22,7 +22,7 @@ We also provide code for:
 * Numpy
 * Matplotlib
 
-The project is written in python 2.7. If CUDA is available, it will be
+The project is written in python 2.7 and Pytorch 1.0.1. If CUDA is available, it will be
 used automatically. The models can also run on CPU as they are not excessively big.
 
 ## Usage
@@ -31,17 +31,24 @@ used automatically. The models can also run on CPU as they are not excessively b
 
 #### Regression experiments
 
-Regression experiments were run on toy and real datasets using BBP, MC Dropout, SGLD and MAP. We carried out homoscedastic and heteroscedastic regression experiements on toy datasets as well as on real data (six UCI datasets). All experiments are available as Jupyter notebooks:
 
-*(ModelName)_(ExperimentType).ipynb*: Contains experiments using (ModelName) on (ExperimentType), i.e. homoscedastic/heteroscedastic. The heteroscedastic notebooks contain both toy and UCI dataset experiments for a given (ModelName).
+We carried out homoscedastic and heteroscedastic regression
+  experiements on toy datasets, generated with a GP [GP ground truth ](https://colab.research.google.com/drive/1t-OmK57w31ukbuftqk-1zAFzIgZhSMwG),
+    as well as on real data (six UCI datasets). 
+    
+All experiments are available as Jupyter notebooks.
+*Notebooks/classification/(ModelName)_(ExperimentType).ipynb*: Contains experiments using (ModelName)
+ on (ExperimentType), i.e. homoscedastic/heteroscedastic. The heteroscedastic
+  notebooks contain both toy and UCI dataset experiments for a given (ModelName).
 
-We wrote these notebooks and did all regression experiments in [Google Colab](https://colab.research.google.com/). This means that you can upload the notebooks to Colab and run on a GPU (for free!). No modifications required - all dependencies and datasets are added from within the notebooks - except for selecting Runtime > Change runtime type > Hardware accelerator > GPU. Also viewable directly in Colab:
+We wrote these notebooks and did all regression experiments
+ in [Google Colab](https://colab.research.google.com/). This means that
+  you can run on a GPU (for free!). No modifications required - all dependencies 
+  and datasets are added from within the notebooks - except for selecting 
+  Runtime -> Change runtime type -> Hardware accelerator -> GPU.
 
-* [MAP homoscedastic](https://colab.research.google.com/drive/1iA3IUjaEHlb0XpLUF_WafbMS70UQnSaA) / [heteroscedastic](https://colab.research.google.com/drive/1B14--H3mduShIDb7M-CPbDOG8lOu2jvK)
-* [BBP homoscedastic](https://colab.research.google.com/drive/1K1I_UNRFwPt9l6RRkp8IYg1504PR9q4L) / [heteroscedastic](https://colab.research.google.com/drive/13oTnT6oKnB6NNBPVAczx8X-QEot2hfp9)
-* [SGLD homoscedastic](https://colab.research.google.com/drive/1vV5bsp7o6SyhAXErHwUC1FYxb-9Dc9SK) / [heteroscedastic](https://colab.research.google.com/drive/1Qk-gGWLwVrYc6hn7-EKIbkIYeZoWBx4f)
-* [MC Dropout homoscedastic](https://colab.research.google.com/drive/11knF0-7F7hK3Yhsj8VkG9fHbdB-LvtpQ) [heteroscedastic](https://colab.research.google.com/drive/11wYjIF9_mPTpJJ-M-TqLJ1X6sfeXtrOd)
-* [GP ground truth homo/heteroscedastic](https://colab.research.google.com/drive/1t-OmK57w31ukbuftqk-1zAFzIgZhSMwG)
+
+<!--* [Regression Results](#homoscedastic-regression)-->
 
 #### MNIST classification experiments
 
@@ -50,13 +57,15 @@ metrics and model weights will be saved to the specified directories.
 
 *src/*: General utilities and model definitions.
 
-*Notebooks/*: An asortment of notebooks which allow for model training, evaluation and
+*Notebooks/classification*: An asortment of notebooks which allow for model training, evaluation and
 running of digit rotation uncertainty experiments. They also allow for weight
 distribution plotting and weight pruning.  They allow for loading of pre-trained models
 for experimentation.
 
 ### Bayes by Backprop (BBP)
 (https://arxiv.org/abs/1505.05424)
+
+Notebooks with regression models: [BBP homoscedastic](https://colab.research.google.com/drive/1K1I_UNRFwPt9l6RRkp8IYg1504PR9q4L) / [heteroscedastic](https://colab.research.google.com/drive/13oTnT6oKnB6NNBPVAczx8X-QEot2hfp9)
 
 Train a model on MNIST:
 ```bash
@@ -89,6 +98,8 @@ python train_BayesByBackprop_MNIST.py --model Local_Reparam [--prior_sig [PRIOR_
 
 A fixed dropout rate of 0.5 is set.
 
+Notebooks with regression models: [MC Dropout homoscedastic](https://colab.research.google.com/drive/11knF0-7F7hK3Yhsj8VkG9fHbdB-LvtpQ) [heteroscedastic](https://colab.research.google.com/drive/11wYjIF9_mPTpJJ-M-TqLJ1X6sfeXtrOd)
+
 Train a model on MNIST:
 ```bash
 python train_MCDropout_MNIST.py [--weight_decay [WEIGHT_DECAY]] [--epochs [EPOCHS]] [--lr [LR]] [--models_dir [MODELS_DIR]] [--results_dir [RESULTS_DIR]]
@@ -105,6 +116,8 @@ python train_MCDropout_MNIST.py -h
 In order to converge to the true posterior over w, the learning rate
 should be annealed according to the [Robbins-Monro](https://en.wikipedia.org/wiki/Stochastic_approximation)
  conditions. In practise, we use a fixed learning rate.
+ 
+Notebooks with regression models: [SGLD homoscedastic](https://colab.research.google.com/drive/1vV5bsp7o6SyhAXErHwUC1FYxb-9Dc9SK) / [heteroscedastic](https://colab.research.google.com/drive/1Qk-gGWLwVrYc6hn7-EKIbkIYeZoWBx4f)
 
 Train a model on MNIST:
 ```bash
@@ -129,6 +142,8 @@ python train_SGLD_MNIST.py --use_preconditioning True [--prior_sig [PRIOR_SIG]] 
 ### Bootstrap MAP Ensemble
 
 Multiple networks are trained on subsamples of the dataset.
+
+Notebooks with regression models: [MAP Ensemble homoscedastic](https://colab.research.google.com/drive/1iA3IUjaEHlb0XpLUF_WafbMS70UQnSaA) / [heteroscedastic](https://colab.research.google.com/drive/1B14--H3mduShIDb7M-CPbDOG8lOu2jvK)
 
 Train an ensemble on MNIST:
 ```bash
@@ -163,7 +178,7 @@ Note that we save the unscaled and uninverted Hessian factors. This will
 allow for computationally cheap changes to the prior at inference time as the
 Hessian will not need to be re-computed. Inference will require inverting
  the approximated Hessian factors and sampling from a matrix normal distribution.
- This is shown in [notebooks/KFAC_Laplace_MNIST.ipynb](https://github.com/JavierAntoran/Bayesian-Neural-Networks/blob/master/notebooks/KFAC_Laplace_MNIST.ipynb)
+ This is shown in [notebooks/KFAC_Laplace_MNIST.ipynb](https://github.com/JavierAntoran/Bayesian-Neural-Networks/blob/master/notebooks/classification/KFAC_Laplace_MNIST.ipynb)
 
 ## Approximate Inference in Neural Networks
 
@@ -185,6 +200,9 @@ Uncertainty caused by noise in the data, or **Aleatoric uncertainty**, can be
 
 ### Homoscedastic Regression
 
+Toy homoscedastic regression task. Data is generated by a GP with a RBF
+ kernel (l = 1, σn = 0.3). We use a single-output FC network with one hidden layer of
+  200 ReLU units to predict the regression mean μ(x). A fixed log σ is learnt separately.
 <p float="center">
   <img src="images/map_homo.png" width="170" />
   <img src="images/bbp_homo.png" width="150" /> 
@@ -193,11 +211,8 @@ Uncertainty caused by noise in the data, or **Aleatoric uncertainty**, can be
   <img src="images/gp_homo.png" width="150" />
 </p>
 
-Toy homoscedastic regression task. Data is generated by a GP with a RBF
- kernel (l = 1, σn = 0.3). We use a single-output FC network with one hidden layer of 200 ReLU units to predict the regression mean μ(x). A fixed log σ is learnt separately.
-
 ### Heteroscedastic Regression
-
+Same scenario as previous section but log σ(x) is predicted from the input.
 <p float="center">
   <img src="images/map_homo.png" width="170" />
   <img src="images/bbp_homo.png" width="150" /> 
@@ -211,16 +226,23 @@ Toy heteroscedastic regression task. Data is generated by a GP with a RBF
  
 ### Regression on UCI datasets
 
-We performed heteroscedastic regression on the six UCI datasets ([housing](https://archive.ics.uci.edu/ml/machine-learning-databases/housing/), [concrete](http://archive.ics.uci.edu/ml/datasets/concrete+compressive+strength), [energy efficiency](https://archive.ics.uci.edu/ml/datasets/energy+efficiency), [power plant](https://archive.ics.uci.edu/ml/datasets/combined+cycle+power+plant), [red wine](https://archive.ics.uci.edu/ml/datasets/wine+quality) and [yacht](http://archive.ics.uci.edu/ml/datasets/yacht+hydrodynamics) datasets), using 10-foild cross validation. All these experiments are contained in the heteroscedastic notebooks. Results depend heavily on training parameters.
-
-Plots below show log-likelihoods and RMSEs on the train (semi-transparent colour) and test (solid colour). Circles and error bars correspond to the 10-fold cross validation mean and standard deviations respectively.
+We performed heteroscedastic regression on the six UCI datasets
+ ([housing](https://archive.ics.uci.edu/ml/machine-learning-databases/housing/),
+  [concrete](http://archive.ics.uci.edu/ml/datasets/concrete+compressive+strength),
+   [energy efficiency](https://archive.ics.uci.edu/ml/datasets/energy+efficiency),
+    [power plant](https://archive.ics.uci.edu/ml/datasets/combined+cycle+power+plant),
+     [red wine](https://archive.ics.uci.edu/ml/datasets/wine+quality) and [yacht](http://archive.ics.uci.edu/ml/datasets/yacht+hydrodynamics) datasets),
+      using 10-foild cross validation. All these experiments are contained in the heteroscedastic notebooks. 
+      Note that results depend heavily on hyperparameter selection. Plots below show log-likelihoods and RMSEs 
+on the train (semi-transparent colour) and test (solid colour). Circles and error bars correspond 
+to the 10-fold cross validation mean and standard deviations respectively.
 
 <p float="center">
-  <img src="images/uci_regression_log_liks.png" float="center" width="600" />
+  <img src="images/uci_regression_log_liks.png" float="center" width="400" />
 </p>
 
 <p float="center">
-  <img src="images/uci_regression_rmses.png" float="center" width="600" />
+  <img src="images/uci_regression_rmses.png" float="center" width="400" />
 </p>
 
 ### MNIST Classification
