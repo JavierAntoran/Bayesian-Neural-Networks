@@ -37,16 +37,11 @@ Regression experiments were run on toy and real datasets using BBP, MC Dropout, 
 
 We wrote these notebooks and did all regression experiments in [Google Colab](https://colab.research.google.com/). This means that you can upload the notebooks to Colab and run on a GPU (for free!). No modifications required - all dependencies and datasets are added from within the notebooks. Also viewable directly in Colab:
 
--[MAP homoscedastic](https://colab.research.google.com/drive/1iA3IUjaEHlb0XpLUF_WafbMS70UQnSaA)
--[MAP heteroscedastic](https://colab.research.google.com/drive/1B14--H3mduShIDb7M-CPbDOG8lOu2jvK)
--[BBP homoscedastic](https://colab.research.google.com/drive/1K1I_UNRFwPt9l6RRkp8IYg1504PR9q4L)
--[BBP heteroscedastic](https://colab.research.google.com/drive/13oTnT6oKnB6NNBPVAczx8X-QEot2hfp9)
--[SGLD homoscedastic](https://colab.research.google.com/drive/1vV5bsp7o6SyhAXErHwUC1FYxb-9Dc9SK)
--[SGLD heteroscedastic](https://colab.research.google.com/drive/1Qk-gGWLwVrYc6hn7-EKIbkIYeZoWBx4f)
--[MC Dropout homoscedastic](https://colab.research.google.com/drive/11knF0-7F7hK3Yhsj8VkG9fHbdB-LvtpQ)
--[MC Dropout heteroscedastic](https://colab.research.google.com/drive/11wYjIF9_mPTpJJ-M-TqLJ1X6sfeXtrOd)
-
-[GP ground truth homo/heteroscedastic](https://colab.research.google.com/drive/1t-OmK57w31ukbuftqk-1zAFzIgZhSMwG)
+* [MAP homoscedastic](https://colab.research.google.com/drive/1iA3IUjaEHlb0XpLUF_WafbMS70UQnSaA) / [heteroscedastic](https://colab.research.google.com/drive/1B14--H3mduShIDb7M-CPbDOG8lOu2jvK)
+* [BBP homoscedastic](https://colab.research.google.com/drive/1K1I_UNRFwPt9l6RRkp8IYg1504PR9q4L) / [heteroscedastic](https://colab.research.google.com/drive/13oTnT6oKnB6NNBPVAczx8X-QEot2hfp9)
+* [SGLD homoscedastic](https://colab.research.google.com/drive/1vV5bsp7o6SyhAXErHwUC1FYxb-9Dc9SK) / [heteroscedastic](https://colab.research.google.com/drive/1Qk-gGWLwVrYc6hn7-EKIbkIYeZoWBx4f)
+* [MC Dropout homoscedastic](https://colab.research.google.com/drive/11knF0-7F7hK3Yhsj8VkG9fHbdB-LvtpQ) [heteroscedastic](https://colab.research.google.com/drive/11wYjIF9_mPTpJJ-M-TqLJ1X6sfeXtrOd)
+* [GP ground truth homo/heteroscedastic](https://colab.research.google.com/drive/1t-OmK57w31ukbuftqk-1zAFzIgZhSMwG)
 
 #### MNIST classification experiments
 
