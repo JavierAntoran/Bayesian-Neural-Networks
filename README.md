@@ -36,7 +36,7 @@ We carried out homoscedastic and heteroscedastic regression
   experiements on toy datasets, generated with [(Gaussian Process ground truth)](https://colab.research.google.com/drive/1t-OmK57w31ukbuftqk-1zAFzIgZhSMwG),
     as well as on real data (six [UCI datasets](https://archive.ics.uci.edu/ml/datasets.php)). 
     
-All experiments are available as Jupyter notebooks.
+    
 *Notebooks/classification/(ModelName)_(ExperimentType).ipynb*: Contains experiments using (ModelName)
  on (ExperimentType), i.e. homoscedastic/heteroscedastic. The heteroscedastic
   notebooks contain both toy and UCI dataset experiments for a given (ModelName).
