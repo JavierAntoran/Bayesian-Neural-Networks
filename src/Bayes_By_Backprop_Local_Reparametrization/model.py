@@ -40,11 +40,11 @@ class BayesLinear_local_reparam(nn.Module):
         self.prior_sig = prior_sig
 
         # Learnable parameters
-        self.W_mu = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-0.2, 0.2))
+        self.W_mu = nn.Parameter(torch.Tensor(self.n_in, self.n_out).uniform_(-0.1, 0.1))
         self.W_p = nn.Parameter(
             torch.Tensor(self.n_in, self.n_out).uniform_(-3, -2))
 
-        self.b_mu = nn.Parameter(torch.Tensor(self.n_out).uniform_(-0.2, 0.2))
+        self.b_mu = nn.Parameter(torch.Tensor(self.n_out).uniform_(-0.1, 0.1))
         self.b_p = nn.Parameter(torch.Tensor(self.n_out).uniform_(-3, -2))
 
     def forward(self, X, sample=False):
