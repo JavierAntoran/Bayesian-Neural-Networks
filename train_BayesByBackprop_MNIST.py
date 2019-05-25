@@ -85,7 +85,7 @@ else:
 cprint('c', '\nNetwork:')
 
 lr = args.lr
-nsamples = args.n_samples  # How many samples to estimate ELBO with at each iteration
+nsamples = int(args.n_samples)  # How many samples to estimate ELBO with at each iteration
 ########################################################################################
 
 if args.model == 'Local_Reparam':
