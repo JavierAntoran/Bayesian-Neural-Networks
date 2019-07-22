@@ -13,6 +13,7 @@ Pytorch implementations for the following approximate inference methods:
 * [Stochastic Gradient Langevin Dynamics](#stochastic-gradient-langevin-dynamics-sgld)
 * [Preconditioned SGLD](#psgld)
 * [Kronecker-Factorised Laplace Approximation](#kronecker-factorised-laplace)
+* Stochastic Gradient Hamiltonian Monte Carlo (Coming soon)//(#stochastic-gradient-hamiltonian-monte-carlo)
 
 We also provide code for:
 * [Bootstrap MAP Ensemble](#bootstrap-map-ensemble)
@@ -178,6 +179,9 @@ allow for computationally cheap changes to the prior at inference time as the
 Hessian will not need to be re-computed. Inference will require inverting
  the approximated Hessian factors and sampling from a matrix normal distribution.
  This is shown in [notebooks/KFAC_Laplace_MNIST.ipynb](https://github.com/JavierAntoran/Bayesian-Neural-Networks/blob/master/notebooks/classification/KFAC_Laplace_MNIST.ipynb)
+
+## Stochastic Gradient Hamiltonian Monte Carlo
+Coming soon 
 
 ## Approximate Inference in Neural Networks
 
