@@ -13,8 +13,8 @@ Pytorch implementations for the following approximate inference methods:
 * [Stochastic Gradient Langevin Dynamics](#stochastic-gradient-langevin-dynamics-sgld)
 * [Preconditioned SGLD](#psgld)
 * [Kronecker-Factorised Laplace Approximation](#kronecker-factorised-laplace)
-* Stochastic Gradient Hamiltonian Monte Carlo (Coming soon)//(#stochastic-gradient-hamiltonian-monte-carlo)
-
+* Stochastic Gradient Hamiltonian Monte Carlo (Coming soon) <!--- (#stochastic-gradient-hamiltonian-monte-carlo)
+-->
 We also provide code for:
 * [Bootstrap MAP Ensemble](#bootstrap-map-ensemble)
 
