@@ -13,7 +13,7 @@ Pytorch implementations for the following approximate inference methods:
 * [Stochastic Gradient Langevin Dynamics](#stochastic-gradient-langevin-dynamics-sgld)
 * [Preconditioned SGLD](#psgld)
 * [Kronecker-Factorised Laplace Approximation](#kronecker-factorised-laplace)
-* Stochastic Gradient Hamiltonian Monte Carlo (Coming soon) <!--- (#stochastic-gradient-hamiltonian-monte-carlo)
+* [Stochastic Gradient Hamiltonian Monte Carlo](#stochastic-gradient-hamiltonian-monte-carlo)
 -->
 
 We also provide code for:
@@ -182,7 +182,22 @@ Hessian will not need to be re-computed. Inference will require inverting
  This is shown in [notebooks/KFAC_Laplace_MNIST.ipynb](https://github.com/JavierAntoran/Bayesian-Neural-Networks/blob/master/notebooks/classification/KFAC_Laplace_MNIST.ipynb)
 
 ## Stochastic Gradient Hamiltonian Monte Carlo
-Coming soon 
+(https://arxiv.org/abs/1402.4102)
+
+We implement the scale-adapted version of this algorithm, proposed [here](https://papers.nips.cc/paper/6117-bayesian-optimization-with-robust-bayesian-neural-networks.pdf)
+to find hyperparameters automatically during burn-in. We place a Gaussian prior
+over network weights and a Gamma hyperprior over the Gaussian's precision.
+
+Run SG-HMC-SA burn in and sampler, saving weights in specified file.
+```bash
+python train_SGHMC_MNIST.py [--epochs [EPOCHS]] [--sample_freq [SAMPLE_FREQ]] [--burn_in [BURN_IN]] [--lr [LR]] [--models_dir [MODELS_DIR]] [--results_dir [RESULTS_DIR]]
+```
+
+For an explanation of the script's arguments:
+```bash
+python train_SGHMC_MNIST.py -h
+```
+ 
 
 ## Approximate Inference in Neural Networks
 
