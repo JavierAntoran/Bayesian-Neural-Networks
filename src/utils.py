@@ -11,13 +11,16 @@ try:
 except:
     import pickle
 
-def lead_object(filename):
+
+def load_object(filename):
     with open(filename, 'rb') as input:
         return pickle.load(input)
+
 
 def save_object(obj, filename):
     with open(filename, 'wb') as output:  # Overwrites any existing file.
         pickle.dump(obj, output, pickle.HIGHEST_PROTOCOL)
+
 
 def mkdir(paths):
     if not isinstance(paths, (list, tuple)):
@@ -129,3 +132,28 @@ class DatafeedImage(data.Dataset):
 
     def __len__(self):
         return len(self.x_train)
+
+
+### functions for BNN with gauss output: ###
+
+def diagonal_gauss_loglike(x, mu, sigma):
+    # note that we can just treat each dim as isotropic and then do sum
+    cte_term = -(0.5)*np.log(2*np.pi)
+    det_sig_term = -torch.log(sigma)
+    inner = (x - mu)/sigma
+    dist_term = -(0.5)*(inner**2)
+    log_px = (cte_term + det_sig_term + dist_term).sum(dim=1, keepdim=False)
+    return log_px
+
+def get_rms(mu, y, y_means, y_stds):
+    x_un = mu * y_stds + y_means
+    y_un = y * y_stds + y_means
+    return torch.sqrt(((x_un - y_un)**2).sum() / y.shape[0])
+
+
+def get_loglike(mu, sigma, y, y_means, y_stds):
+    mu_un = mu * y_stds + y_means
+    y_un = y * y_stds + y_means
+    sigma_un = sigma * y_stds
+    ll = diagonal_gauss_loglike(y_un, mu_un, sigma_un)
+    return ll.mean(dim=0)
