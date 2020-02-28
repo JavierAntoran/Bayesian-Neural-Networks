@@ -216,7 +216,7 @@ ax1.set_ylabel('Cross Entropy')
 plt.xlabel('epoch')
 plt.grid(b=True, which='major', color='k', linestyle='-')
 plt.grid(b=True, which='minor', color='k', linestyle='--')
-lgd = plt.legend(['test error', 'train error'], markerscale=marker, prop={'size': textsize, 'weight': 'normal'})
+lgd = plt.legend(['train error', 'test error'], markerscale=marker, prop={'size': textsize, 'weight': 'normal'})
 ax = plt.gca()
 plt.title('classification costs')
 for item in ([ax.title, ax.xaxis.label, ax.yaxis.label] +
