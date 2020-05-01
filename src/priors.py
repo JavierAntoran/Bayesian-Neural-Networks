@@ -59,7 +59,7 @@ class spike_slab_2GMM(object):
 
         # Numerical stability trick -> unnormalising logprobs will underflow otherwise
         max_loglike = torch.max(N1_ll, N2_ll)
-        normalised_like = self.pi1 + torch.exp(N1_ll - max_loglike) + self.pi2 + torch.exp(N2_ll - max_loglike)
+        normalised_like = self.pi1 * torch.exp(N1_ll - max_loglike) + self.pi2 * torch.exp(N2_ll - max_loglike)
         loglike = torch.log(normalised_like) + max_loglike
 
         return loglike
