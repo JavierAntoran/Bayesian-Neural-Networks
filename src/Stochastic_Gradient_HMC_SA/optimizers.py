@@ -21,7 +21,7 @@ class H_SA_SGHMC(Optimizer):
             self.weight_decay = 1 / (gauss_sig ** 2)
 
         if self.weight_decay <= 0.0:
-            raise ValueError("Invalid weight_decay value: {}".format(weight_decay))
+            raise ValueError("Invalid weight_decay value: {}".format(self.weight_decay))
         if lr < 0.0:
             raise ValueError("Invalid learning rate: {}".format(lr))
         if base_C < 0:
